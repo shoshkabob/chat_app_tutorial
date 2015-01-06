@@ -1,20 +1,24 @@
-.wrapper
+/*the complete page*/
+.pageWrap
 {
-	max-width: 48em;
+/*	max-width: 48em;
+*/	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
 	padding-right: 24px;
 	padding-left: 24px;
 }
+	/**/
 	.variable
 	{
 		border: 1px solid #0000ff;
 	}
-	.id
+	/**/
+	.tag
 	{
 		border: 1px solid #0000ff;
 	}
-
+	/**/
 	.prettyprint
 	{
 		max-width: 48em;
@@ -25,23 +29,58 @@
 		background-color: #f0f6ba;
 		border-color: #f0f6ba;
 	}
+/**/
 #introPage
 {
-
+	
 }
-	#colorC1
-	{
-		background-color: 
-	}
+/**/
 #conceptPage
 {
 
 }
+/**/
 #serverPage
 {
 
 }
+/**/
 #clientPage
 {
 
 }
+/*navigation bar*/
+.nav
+{
+	border: 1px  solid black;
+	margin: 0;
+}
+/*navigation list*/
+.list
+{
+	margin: 0;
+	list-style:none;
+	display: none;
+	border: 1px solid black;
+}
+/*navigation sublist*/
+.subList
+{
+	margin: 2px;
+}
+/*navigation headers*/
+#nav
+{
+	width: 200px;
+	position: fixed;
+}
+/*edits content*/
+#content{
+	width: 800px;
+	background-color: red;
+}
+#overflow{
+	background-color: blue;
+	margin-left: 250px;
+	max-width: 800px;
+	overflow: auto;
