@@ -115,7 +115,7 @@
 			}
 		</code></pre>
 
-		<p>It may may seem short, but it does a lot in that one line of code. Remember that the variable server is the object that we created using the code from the ws package. Creating an event for this object is simply calling the method ".on" on it. The ".on" method takes two arguments: the type of event, and the function to execute when this event occurs. In this case the event is of type "connection" which means that function will fire whenever someone connects to the server. Notice that the anonymous function is being provided an argument that we called conn. This local variable will hold an object that represents the user that just connected. The server handles all incoming and outgoing messages coming from and going to the user through their conn object. This is very important to understand as we will be calling methods on this object in the next section.</p>
+		<p>It may may seem short, but it does a lot in that one line of code. Remember that the variable <code class="variable">server</code> is the object that we created using the code from the ws package. Creating an event for this object is simply calling the method ".on" on it. The ".on" method takes two arguments: the type of event, and the function to execute when this event occurs. In this case the event is of type "connection" which means that function will fire whenever someone connects to the server. Notice that the anonymous function is being provided an argument that we called conn. This local variable will hold an object that represents the user that just connected. The server handles all incoming and outgoing messages coming from and going to the user through their conn object. This is very important to understand as we will be calling methods on this object in the next section.</p>
 
 		<a name="c_s4"></a>
 		<h2 id="c_s_4">Receiving Messages</h2>
@@ -128,13 +128,13 @@
 			}
 		</code></pre>
 
-		<p>Notice that the new event created is within the event listener for the connection. The conn variable that holds the connection object is a local variable and so is destroyed after the connection occurs.</p>
+		<p>Notice that the new event created is within the event listener for the connection. The <code class="variable">conn</code> variable that holds the connection object is a local variable and so is destroyed after the connection occurs.</p>
 
-		<p>We use the ".on" method again to create an event, this time of type "message". This means that everytime the server gets a message from this conn obect, the server will execute the given function. The function has one parameter that we called msg. This will contain the string, or message, that the server is receving. It's important to note that the only type of data able to be sent through this connection are strings.</p>
+		<p>We use the ".on" method again to create an event, this time of type "message". This means that everytime the server gets a message from this conn obect, the server will execute the given function. The function has one parameter that we called <code class="variable">msg</code>. This will contain the string, or message, that the server is receving. It's important to note that the only type of data able to be sent through this connection are strings.</p>
 
 		<a name="c_s5"></a>
 		<h2 id="c_s5">Sending Messages</h2>
-		<p>If you looked back at the original full code I typed above, you'll notice that I skipped a few lines, primarly the ones that had to do with the userDb variable I created. </p>
+		<p>If you looked back at the original full code I typed above, you'll notice that I skipped a few lines, primarly the ones that had to do with the <code class="variable">userDb</code> variable I created. </p>
 
 		<pre class="prettyprint"><code>
 			var userDb = [];
