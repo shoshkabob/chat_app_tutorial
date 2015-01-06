@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Chat Tutorial</title>
 	<link rel="stylesheet" href="chatTutorial.css">
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="wrapper">
@@ -17,8 +18,8 @@
 			<h2>Creating a Local Git Repo</h2>
 			<p>The first thing you need is to create a local repo on your hard drive. You can do this by opening your terminal and navigating to your current project file, then initializing a git repo, like so:</p>
 			<pre class="prettyprint"><code>
-				$ cd YOUR_PROJECT_FOLDER
-				$ git init
+  $ cd YOUR_PROJECT_FOLDER
+  $ git init
 			</pre></code>
 			<p><i>**As you may have noticed, the command for git is simply</i> <code>git</code>.</p>
 			<p>Congrats! You now have a local git repo.</p>
@@ -43,10 +44,10 @@
 			<p>Click the "SSH" button and copy that link to your clipboard.</p>
 			<p>Now, return to your terminal. In that same project folder where you initialized your repo, you will now <b>add</b> your files to be <b>staged</b>, <b>commit</b> them with a message that describes the changes (or, in this instance, that it is your first commit), and then <b>push</b> your files into the GitHub repo.</p>
 			<pre class="prettyprint"><code>
-				$ git add .
-				$ git commit -m "first commit"
-				$ git remote add origin git@github.com:YOUR_GITHUB_NAME/YOUR_GITHUB_REPO.git
-				$ git push origin master
+  $ git add .
+  $ git commit -m "first commit"
+  $ git remote add origin git@github.com:YOUR_GITHUB_NAME/YOUR_GITHUB_REPO.git
+  $ git push origin master
 			</pre></code>
 			<p>Typing a period after <code>add</code> adds all of the files in the folder. The <code>-m</code> flag creates a message. This is mandatory for all commits. The message is then added in quotations, and cannot contain certain special characters.</p>
 			<p>After <code>git remote add origin</code>, replace the link in the above code with the SSH link you copied from the page.</p>
