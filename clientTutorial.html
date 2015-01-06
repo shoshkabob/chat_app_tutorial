@@ -1,5 +1,5 @@
-<div>
-<h1 id="c_c">Chat Client Implementation</h1>
+<div id="pageClient">
+<h1 id="c_client">Chat Client Implementation</h1>
 <h2 id="c_c1">Introduction</h2>
 <p>
 	Our chat client will be written using pure JavaScript under the Web Socket protocol. Because it will be using a web browser as the interface it will be designed in HTML and CSS. A basic chat client needs to be able do 4 things: connect to the server, receive messages from the server, send a message to the server, which in turn will send to the other clients that are currently connected, and populate all messages received from the server onto the web browser. I will explain each snippet of code in detail. Our basic chat client will be below at the end of this chat client tutorial. 
@@ -10,7 +10,7 @@
 	</ul>
 </p>
 <h2 id="c_c2">Prompt for Name.</h2>
-<p>I created a simple prompt to store the input value into the variable <var><b><font color="blue">name</font></b></var>. This will occur when you initially go to the chat app address.</p>
+<p>I created a simple prompt to store the input value into the variable <code>name</code>. This will occur when you initially go to the chat app address.</p>
 <pre class="prettyprint"><code>
 var name;
 var myFunction = function() 
@@ -26,27 +26,27 @@ myFunction();
 </code></pre>
 
 <h2 id="c_c3">Starting Connection</h2> 
-<p>In this example I set the variable to <var><b><font color="blue">ws</font></b></var>. This variable is set to a new instance of the constructor <var><b><font color="blue">Websocket</font></b></var> with a localhost pointing to the port <font color="red">3000</font>.
+<p>In this example I set the variable to <code>ws</code>. This variable is set to a new instance of the constructor <code>Websocket</code> with a localhost pointing to the port <font color="red">3000</font>.
 </p>
 <pre class="prettyprint"><code>
 var ws = new WebSocket("ws://localhost:3000");
 </code></pre>	
 
 <h2 id="c_c4">Receiving Messages</h2>
-<p>Create an addEventListener to <var><b><font color="blue">ws</font></b></var>, within the addEventListener the first argument <var><b><font color="blue">message</font></b></var> is listening for any incoming message from the server. The second argument is an anonymous function with a single parameter that I set to <var><b><font color="blue">message</font></b></var>.
+<p>Create an addEventListener to <code>ws</code>, within the addEventListener the first argument <code>message</code> is listening for any incoming message from the server. The second argument is an anonymous function with a single parameter that I set to <code>message</code>.
 </p>
 <pre class="prettyprint"><code>
 		ws.addEventListener("message", function(message){})
 </code></pre> 	
 <p>
-	In this code block it would be inserted into curler brackets <font color="blue">{}</font> of the addEventListener. In this example I set the variable to <var><b><font color="blue">parsedmsg</font></b></var>. Assign it to the incoming message that will be parsed using JSON, <var><b><font color="blue">data</font></b></var> is the property of the object <var><b><font color="blue">message</font></b></var>. The property data allows you to store the incoming message from the server.
+	In this code block it would be inserted into curler brackets <font color="blue">{}</font> of the addEventListener. In this example I set the variable to <code>parsedmsg</code>. Assign it to the incoming message that will be parsed using JSON, <code>data</code> is the property of the object <code>message</code>. The property data allows you to store the incoming message from the server.
 </p>	
 <pre class="prettyprint"><code>
 	var parsedmsg = JSON.parse(message.data);
       div.appendChild(comment);
 </code></pre>	
 <p>
-	Set forEach to parsedmsg and insert an anonymous function as an argument. For future reference a forEach loop only takes in one argument. This will loop through every message coming from the server. Inside the anonymous function, I set a single parameter to <var><b><font color="blue">parse</font></b></var>. I assign the variable <var><b><font color="blue">newmsg</font></b></var> to the parse dot the keys of the . I assign the variable <var><b><font color="blue">div</font></b></var> to the element id <b><font color="teal">div</font></b>. I assign the variable <var><b><font color="blue">comment</font></b></var> to a created paragraph tag <b><font color="teal">p</font></b>. I insert <var><b><font color="blue">comment</font></b></var> into the <b><font color="teal">div</font></b>. 
+	Set forEach to parsedmsg and insert an anonymous function as an argument. For future reference a forEach loop only takes in one argument. This will loop through every message coming from the server. Inside the anonymous function, I set a single parameter to <code>parse</code>. I assign the variable <code>newmsg</code> to the parse dot the keys of the . I assign the variable <code>div</code> to the element id <b>div</b>. I assign the variable <code>comment</code> to a created paragraph tag <b>p</b>. I insert <code>comment</code> into the <b>div</b>. 
 </p>
 <pre class="prettyprint"><code>
 	parsedmsg.forEach(function(parse)
@@ -66,7 +66,7 @@ var ws = new WebSocket("ws://localhost:3000");
 
 <h2 id="c_c5">Sending Message</h2>
 <p>
-		  I create an addEventListener to the variable <var><b><font color="blue">textbox</font></b></var>. It will listen for the press of the keyboard in the first argument. In the second argument takes an anonymous function with one parameter <var><b><font color="blue">enter</font></b></var>. I set a if statement to execute only when the keycode equals 13. Keycodes are values that are assigned to individual keys on a keyboard. I assign a variable <var><b><font color="blue">msghash</font></b></var> to hash with the keys and values assigned to it. The name key takes in the value of the variable <var><b><font color="blue">name</font></b></var>. The message key takes in the value of the input, that is set to the id <b><font color="teal">text</font></b>. I assigned the variable <var><b><font color="blue">msgstrng</font></b></var> to string created variable <var><b><font color="blue">msghash</font></b></var>. If you remember from early <var><b><font color="blue">ws</font></b></var> is an instance of the constructor Websocket. Here I send <var><b><font color="blue">msgstrng</font></b></var> to the server. Then I clear the input.
+		  I create an addEventListener to the variable <code>textbox</code>. It will listen for the press of the keyboard in the first argument. In the second argument takes an anonymous function with one parameter <code>enter</code>. I set a if statement to execute only when the keycode equals 13. Keycodes are values that are assigned to individual keys on a keyboard. I assign a variable <code>msghash</code> to hash with the keys and values assigned to it. The name key takes in the value of the variable <code>name</code>. The message key takes in the value of the input, that is set to the id <b>text</b>. I assigned the variable <code>msgstrng</code> to string created variable <code>msghash</code>. If you remember from early <code>ws</code> is an instance of the constructor Websocket. Here I send <code>msgstrng</code> to the server. Then I clear the input.
 
 </p> 
 <pre class="prettyprint"><code>
@@ -87,11 +87,11 @@ var ws = new WebSocket("ws://localhost:3000");
 	  });
 </code></pre>
 <p>
-		  I create an addEventListener to the variable <var><b><font color="blue">button</font></b></var>. It will listen for the click of the button in the first argument. In the second argument takes an anonymous function without a parameter. I set a if statement to execute only when the variable <var><b><font color="blue">textbox</font></b></var> is not empty.  I assign a variable <var><b><font color="blue">msghash</font></b></var> to hash with the keys and values assigned to it. The name key takes in the value of the variable <var><b><font color="blue">name</font></b></var>. The message key takes in the value of the input, that is set to the id <b><font color="teal">text</font></b>. I assigned the variable <var><b><font color="blue">msgstrng</font></b></var> to string created variable <var><b><font color="blue">msghash</font></b></var>. If you remember from early <var><b><font color="blue">ws</font></b></var> is an instance of the constructor Websocket. Here I send <var><b><font color="blue">msgstrng</font></b></var> to the server. Then I clear the input.
+		  I create an addEventListener to the variable <code>button</code>. It will listen for the click of the button in the first argument. In the second argument takes an anonymous function without a parameter. I set a if statement to execute only when the variable <code>textbox</code> is not empty.  I assign a variable <code>msghash</code> to hash with the keys and values assigned to it. The name key takes in the value of the variable <code>name</code>. The message key takes in the value of the input, that is set to the id <b>text</b>. I assigned the variable <code>msgstrng</code> to string created variable <code>msghash</code>. If you remember from early <code>ws</code> is an instance of the constructor Websocket. Here I send <code>msgstrng</code> to the server. Then I clear the input.
 
 </p>
 <pre class="prettyprint"><code>
-		  var button = document.getElementById("button");
+	var button = document.getElementById("button");
 	  button.addEventListener("click",function()
 	  {
 	    if (textbox.value!=="")

@@ -1,0 +1,47 @@
+.wrapper
+{
+	max-width: 48em;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 24px;
+	padding-left: 24px;
+}
+	.variable
+	{
+		border: 1px solid #0000ff;
+	}
+	.id
+	{
+		border: 1px solid #0000ff;
+	}
+
+	.prettyprint
+	{
+		max-width: 48em;
+		margin-right: auto;
+		margin-left: auto;
+		padding-right: 24px;
+		padding-left: 24px;
+		background-color: #f0f6ba;
+		border-color: #f0f6ba;
+	}
+#introPage
+{
+
+}
+	#colorC1
+	{
+		background-color: 
+	}
+#conceptPage
+{
+
+}
+#serverPage
+{
+
+}
+#clientPage
+{
+
+}
