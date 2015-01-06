@@ -3,11 +3,40 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Chat Tutorial</title>
+	<link rel="stylesheet" href="chatTutorial.css">
 </head>
 <body>
-	<div>
-		<h1 id="c">Concepts You Should Know</h1>
+<div class="wrapper">
+	
+	<div id="introPage">
+	<a name="c_intro"></a>
+	<h1 id="c_intro">Introduction</h1>
+		<p>
+			In this tutorial we will be creating a simple web-based chat application with Node and Websockets. The topics that will be covered are the source code needed to build.
+			<ul>
+				<li>Client</li>
+				<li>Server</li>
+				<li>Styling (HTML/CSS)</li>
+			</ul>
+		</p>
+		<p>
+			As well as certain repositories to store your chat app in and how to have it hosted and running functionally.
+			<ul>
+				<li>Creating a Git Repo</li>
+				<li>Creating a Github Repo</li>
+				<li>Commiting your code at key points</li>
+				<li>Testing out locally</li>
+				<li>Hosting on Digital Ocean</li>
+				<li>Git clone to the correct Github Repo</li>
+				<li>Run a http-server</li>
+			</ul>
+		</p>
+	</div>
+		<div id="conceptPage">
+		<a name="c_concepts"></a>
+		<h1 id="c_concepts">Concepts You Should Know</h1>
 
+		<a name="c1"></a>
 		<h2 id="c1">Node.js</h2>
 		<p>Node.js is a cross-platform runtime environment used to create networking application purely in JavaScript. This is what we will be using to code our chat server in. Node contains is own package manager called node package manager (or npm for short). The packages you download from here can be either executables or useable code libraries. We will primarily be using the code libraries (a specific one called ws). First, however, you must understand how to use npm. 
 		<p> The first thing you need to do is create a package.json file. To do this you need to open your terminal and cd into whatever directory that you will be using to hold your code. Type:</p>
@@ -18,6 +47,7 @@
 
 		<p> The following prompts are not very useful at this time, so you can literally press enter through all of them just to get your package.json configured. You'll know it worked when you have the package.json file in your diretory. The main reason why you need this file is to manage dependencies. When you download a package from npm, this is the place that will tell anyone who uses the code that the package is needed to run the program. </p>
 
+		<a name="c2"></a>
 		<h2 id="c2">Web Sockets</h2>
 
 		<p>Web Sockets is a old internet protocol that is becoming increasinly more popular on todays web. When you browse the internet on your browser, most of the time you are using the http protols. A reqeust is sent to the server that you are trying to get information from and a response is send. The connection between you and the server is created and immediately severed one the response is sent. The flow of data is from client to server and then back to client. This way has a lot of benefits, but when your creating an application that is constantly sending/listening for messages, it becomes a big problem. Web Sockets solve this problem.</p>
@@ -32,10 +62,12 @@
 		
 		
 	</div>
-	<div>
-		<h1 id="c_s">Chat Server</h1>
+	<div id="serverPage">
+	<a name="c_server"></a>
+		<h1 id="c_server">Chat Server</h1>
 
-		<h2 id="c_s_1">Introduction</h2>
+		<a name="c_s1"></a>
+		<h2 id="c_s1">Introduction</h2>
 		<p>Our chat server will be written using pure JavaScript under the Web Socket protocol. A basic chat server needs to be able do 3 things: allow clients to connect to it, receive messages being sent to it, and send the messages to clients that are currently connected. Our basic chat server will look like below at the end of this tutorial. I will explain each snippet of code in detail.</p>
 		<pre class="prettyprint"><code>
 			var WebSocketServer = require("ws").Server;
@@ -60,7 +92,8 @@
 
 		<p>First, you'll need to create the file. Since the file will be a JavaScript file, use .js as its extension (for example: server.js).</p>
 
-		<h2 id="c_s_2">Node.js Required</h2>
+		<a name="c_s2"></a>
+		<h2 id="c_s2">Node.js Required</h2>
 
 		<p>In order to use a package in your code, you will need to tell your file that you will require it. If you have not already, install ws into the folder that contains your chat server as described in an earlier section. This brings us to the first section of our code:<p>
 
@@ -73,7 +106,8 @@
 
 		<p>Now we have our project ready to go. A program with just these 2 lines of code will run, but will not be able accept any connections. For this we need to add an event listener that will listen for these connections.</p>
 
-		<h2 id="c_s_3">Connection</h2>
+		<a name="c_s3"></a>
+		<h2 id="c_s3">Connection</h2>
 		<p>We now need to specify what our program to will do when someone tries to connect to it. To do this we will create an event listener that listens for the connection event. The code is a follow:</p>
 
 		<pre class="prettyprint"><code>
@@ -81,8 +115,9 @@
 			}
 		</code></pre>
 
-		<p>It may may seem short, but it does a lot in that one line of code. Remember that the variable server is the object that we created using the code from the ws package. Creating an event for this object is simply calling the method ".on" on it. The ".on" method takes two arguments: the type of event, and the function to execute when this event occurs. In this case the event is of type "connection" which means that function will fire whenever someone connects to the server. Notice that the anonymous function is being provided an argument that we called conn. This local variable will hold an object that represents the user that just connected. The server handles all incoming and outgoing messages coming from and going to the user through their conn object. This is very important to understand as we will be calling methods on this object in the next section.</p>
+		<p>It may may seem short, but it does a lot in that one line of code. Remember that the variable <code class="variable">server</code> is the object that we created using the code from the ws package. Creating an event for this object is simply calling the method ".on" on it. The ".on" method takes two arguments: the type of event, and the function to execute when this event occurs. In this case the event is of type "connection" which means that function will fire whenever someone connects to the server. Notice that the anonymous function is being provided an argument that we called conn. This local variable will hold an object that represents the user that just connected. The server handles all incoming and outgoing messages coming from and going to the user through their conn object. This is very important to understand as we will be calling methods on this object in the next section.</p>
 
+		<a name="c_s4"></a>
 		<h2 id="c_s_4">Receiving Messages</h2>
 		<p>Similar to listening for connections, we also need to listen for messages. To do this we must create an event on each user object that connects telling our program to listen to all incoming messages by them. The code is as follows.</p>
 		
@@ -93,12 +128,13 @@
 			}
 		</code></pre>
 
-		<p>Notice that the new event created is within the event listener for the connection. The conn variable that holds the connection object is a local variable and so is destroyed after the connection occurs.</p>
+		<p>Notice that the new event created is within the event listener for the connection. The <code class="variable">conn</code> variable that holds the connection object is a local variable and so is destroyed after the connection occurs.</p>
 
-		<p>We use the ".on" method again to create an event, this time of type "message". This means that everytime the server gets a message from this conn obect, the server will execute the given function. The function has one parameter that we called msg. This will contain the string, or message, that the server is receving. It's important to note that the only type of data able to be sent through this connection are strings.</p>
+		<p>We use the ".on" method again to create an event, this time of type "message". This means that everytime the server gets a message from this conn obect, the server will execute the given function. The function has one parameter that we called <code class="variable">msg</code>. This will contain the string, or message, that the server is receving. It's important to note that the only type of data able to be sent through this connection are strings.</p>
 
-		<h2 id="c_s_5">Sending Messages</h2>
-		<p>If you looked back at the original full code I typed above, you'll notice that I skipped a few lines, primarly the ones that had to do with the userDb variable I created. </p>
+		<a name="c_s5"></a>
+		<h2 id="c_s5">Sending Messages</h2>
+		<p>If you looked back at the original full code I typed above, you'll notice that I skipped a few lines, primarly the ones that had to do with the <code class="variable">userDb</code> variable I created. </p>
 
 		<pre class="prettyprint"><code>
 			var userDb = [];
@@ -127,7 +163,8 @@
 
 		<p>In order to do this we simply loop through the userDb array, which contains every connection object made so far, and call the ".send()" method on each object with the message that the server received.</p>
 
-		<h2 id="c_s_6">Handling Disconnections</h2>
+		<a name="c_s6"></a>
+		<h2 id="c_s6">Handling Disconnections</h2>
 
 		<p>The last problem we have to deal with is with disconnections. When someone disconnects from our server will still try to send them the messages as long as they are still apart of our userDb array. Luckily, there is an event called "close" that can handle this for us.</p>
 
@@ -143,10 +180,193 @@
 
 		<p>This code is contained in the connection event. Again, we are creating an event using the ".on" method. When the connection is closed, this event executes the function given. In order to take the connection object out of the userDb array, we looped through the array and spliced the conn object that is the same as the connection object that is closing.</p>
 
-		<h2 id="c_s_7">Conclusion</h2>
+		<a name="c_s7"></a>
+		<h2 id="c_s7">Conclusion</h2>
 
 		<p>This is a very basic chat server. Essentially all it does is allow clients to connect, and takes the messages the clients send and sends them out to everyone who is currently connected. it also handles disconnections. There is a lot more than you can do that is not in this tutorial. For example, most modern chat apps contain chat rooms, private messages, and emoticons. All of this can be implemented using the template above.</p> 
 	</div>
+	<div id="clientPage">
+	<a name="c_client"></a>
+<h1 id="c_client">Chat Client Implementation</h1>
+<a name="c_c1"></a>
+<h2 id="c_c1">Introduction</h2>
+<p>
+	Our chat client will be written using pure JavaScript under the Web Socket protocol. Because it will be using a web browser as the interface it will be designed in HTML and CSS. A basic chat client needs to be able do 4 things: connect to the server, receive messages from the server, send a message to the server, which in turn will send to the other clients that are currently connected, and populate all messages received from the server onto the web browser. I will explain each snippet of code in detail. Our basic chat client will be below at the end of this chat client tutorial. 
+	<ul>
+		<li>
+			Bonus: Prompt created to store client name.
+		</li>
+	</ul>
+</p>
+<a name="c_c2"></a>
+<h2 id="c_c2">Prompt for Name.</h2>
+<p>I created a simple prompt to store the input value into the variable <code class="variable">name</code>. This will occur when you initially go to the chat app address.</p>
+<pre class="prettyprint"><code>
+var name;
+var myFunction = function() 
+{
+	var person = prompt("Please enter your name");
+
+	if (person != null)
+	{
+	name = person;
+	};
+};
+myFunction();
+</code></pre>
+
+<a name="c_c3"></a>
+<h2 id="c_c3">Starting Connection</h2> 
+<p>In this example I set the variable to <code class="variable">ws</code>. This variable is set to a new instance of the constructor <code class="variable">Websocket</code> with a localhost pointing to the port <font color="red">3000</font>.
+</p>
+<pre class="prettyprint"><code>
+var ws = new WebSocket("ws://localhost:3000");
+</code></pre>	
+
+<a name="c_c4"></a>
+<h2 id="c_c4">Receiving Messages</h2>
+<p>Create an addEventListener to <code class="variable">ws</code>, within the addEventListener the first argument <code class="variable">message</code> is listening for any incoming message from the server. The second argument is an anonymous function with a single parameter that I set to <code class="variable">message</code>.
+</p>
+<pre class="prettyprint"><code>
+		ws.addEventListener("message", function(message){})
+</code></pre> 	
+<p>
+	In this code block it would be inserted into curler brackets <font color="blue">{}</font> of the addEventListener. In this example I set the variable to <code class="variable">parsedmsg</code>. Assign it to the incoming message that will be parsed using JSON, <code class="variable">data</code> is the property of the object <code class="variable">message</code>. The property data allows you to store the incoming message from the server.
+</p>	
+<pre class="prettyprint"><code>
+	var parsedmsg = JSON.parse(message.data);
+      div.appendChild(comment);
+</code></pre>	
+<p>
+	Set forEach to parsedmsg and insert an anonymous function as an argument. For future reference a forEach loop only takes in one argument. This will loop through every message coming from the server. Inside the anonymous function, I set a single parameter to <code class="variable">parse</code>. I assign the variable <code class="variable">newmsg</code> to the parse dot the keys of the . I assign the variable <code class="variable">div</code> to the element id <b class="id">div</b>. I assign the variable <code class="variable">comment</code> to a created paragraph tag <b class="id">p</b>. I insert <code class="variable">comment</code> into the <b class="id">div</b>. 
+</p>
+<pre class="prettyprint"><code>
+	parsedmsg.forEach(function(parse)
+    {
+      var newmsg = parse.name + ": " + parse.message;
+      var div = document.getElementById("div");
+      var comment = document.createElement("p");
+</code></pre>
+<p>	
+	Adding Messages to DOM
+</p>
+	<pre class="prettyprint"><code>
+		comment.innerHTML = newmsg;
+		console.log(newmsg);
+	});
+	</code></pre>	
+
+<a name="c_c5"></a>
+<h2 id="c_c5">Sending Message</h2>
+<p>
+		  I create an addEventListener to the variable <code class="variable">textbox</code>. It will listen for the press of the keyboard in the first argument. In the second argument takes an anonymous function with one parameter <code class="variable">enter</code>. I set a if statement to execute only when the keycode equals 13. Keycodes are values that are assigned to individual keys on a keyboard. I assign a variable <code class="variable">msghash</code> to hash with the keys and values assigned to it. The name key takes in the value of the variable <code class="variable">name</code>. The message key takes in the value of the input, that is set to the id <b class="id">text</b>. I assigned the variable <code class="variable">msgstrng</code> to string created variable <code class="variable">msghash</code>. If you remember from early <code class="variable">ws</code> is an instance of the constructor Websocket. Here I send <code class="variable">msgstrng</code> to the server. Then I clear the input.
+
+</p> 
+<pre class="prettyprint"><code>
+	  var textbox = document.getElementById("text");
+	  textbox.addEventListener("keydown",function(enter)
+	  {
+	    if (enter.keyCode===13)
+	    {
+	      var msghash =
+	      {
+	        name:name,
+	        message:document.getElementById("text").value
+	      };
+	      var msgstrng = JSON.stringify(msghash);
+	      ws.send(msgstrng);
+	      textbox.value ="";
+	    }
+	  });
+</code></pre>
+<p>
+		  I create an addEventListener to the variable <code class="variable">button</code>. It will listen for the click of the button in the first argument. In the second argument takes an anonymous function without a parameter. I set a if statement to execute only when the variable <code class="variable">textbox</code> is not empty.  I assign a variable <code class="variable">msghash</code> to hash with the keys and values assigned to it. The name key takes in the value of the variable <code class="variable">name</code>. The message key takes in the value of the input, that is set to the id <b class="id">text</b>. I assigned the variable <code class="variable">msgstrng</code> to string created variable <code class="variable">msghash</code>. If you remember from early <code class="variable">ws</code> is an instance of the constructor Websocket. Here I send <code class="variable">msgstrng</code> to the server. Then I clear the input.
+
+</p>
+<pre class="prettyprint"><code>
+	var button = document.getElementById("button");
+	  button.addEventListener("click",function()
+	  {
+	    if (textbox.value!=="")
+	    {
+	      var msghash =
+	      {
+	        name:name,
+	        message:document.getElementById("text").value
+	      };
+	      var msgstrng = JSON.stringify(msghash);
+	      ws.send(msgstrng);
+	      textbox.value ="";
+	    }
+	  });
+</code></pre>
+
+<a name="c_c6"></a>
+<h2 id="c_c6">Conclusion</h2>
+<p>
+	This is what the code should look like when put all together.
+</p>
+<pre class="prettyprint"><code>
+	var name;
+var myFunction = function() 
+{
+    var person = prompt("Please enter your name");
+    
+    if (person != null)
+    {
+        name = person;
+    };
+};
+myFunction();
+
+var ws = new WebSocket("ws://localhost:3000");
+ws.addEventListener("message", function(message)
+{
+	var parsedmsg = JSON.parse(message.data);
+	parsedmsg.forEach(function(parse)
+    {
+      var newmsg = parse.name + ": " + parse.message;
+      var comment = document.createElement("p");
+      var div = document.getElementById("div");
+      div.appendChild(comment);
+      comment.innerHTML = newmsg;
+      console.log(newmsg);
+    })
+    var textbox = document.getElementById("text");
+    textbox.addEventListener("keydown",function(enter)
+	{
+	    if (enter.keyCode===13)
+	    {
+	      var msghash =
+	      {
+	        name:name,
+	        message:document.getElementById("text").value
+	      };
+	      var msgstrng = JSON.stringify(msghash);
+	      ws.send(msgstrng);
+	      textbox.value ="";
+	    }
+	});
+  	var button = document.getElementById("button");
+  	button.addEventListener("click",function()
+	{
+	    if (textbox.value!=="")
+	    {
+	      var msghash =
+	      {
+	        name:name,
+	        message:document.getElementById("text").value
+	      };
+	      var msgstrng = JSON.stringify(msghash);
+	      ws.send(msgstrng);
+	      textbox.value ="";
+	    }
+	});
+});
+</code></pre>
+</div>
+
+</div>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </body>
 </html>
